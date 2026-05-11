@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ES Blanquefort Basket — Créneaux rentrée V3</title>
+<style>
+:root{
+  --club:#0b5c3b;--club2:#073d29;--bg:#f4f8f5;--text:#102018;--line:#d7e2dc;--gold:#c79a3b;
+  --fongravey:#0b5c3b;--fongravey-bg:#e8f6ee;
+  --pdr:#1f6feb;--pdr-bg:#eaf2ff;
+  --dupaty:#e67e22;--dupaty-bg:#fff2dd;
+  --lycee:#7d3c98;--lycee-bg:#f4eaff;
+  --danger:#c0392b;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{background:linear-gradient(135deg,var(--club),var(--club2));color:#fff;padding:18px;position:sticky;top:0;z-index:50;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.header-inner{max-width:1520px;margin:auto;display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}
+.logo-lock{
+  width:54px;height:54px;border-radius:16px;background:white;color:var(--club);
+  display:flex;align-items:center;justify-content:center;font-weight:950;font-size:20px;
+  box-shadow:0 8px 18px rgba(0,0,0,.18);cursor:pointer;user-select:none;
+}
+.logo-lock img{width:100%;height:100%;object-fit:contain;border-radius:16px}
+.public .logo-lock{cursor:default}
+h1{font-size:22px;margin:0;line-height:1.1} header p{margin:5px 0 0;opacity:.9;font-size:13px}
+.wrap{max-width:1520px;margin:auto;padding:16px}.card{background:white;border:1px solid var(--line);border-radius:18px;padding:16px;margin:14px 0;box-shadow:0 8px 24px rgba(15,23,42,.06)}
+h2{font-size:19px;color:var(--club);margin:0 0 12px}h3{font-size:15px;margin:14px 0 8px}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+button,select,input,textarea{font:inherit}button{border:0;border-radius:999px;padding:9px 13px;background:var(--club);color:white;cursor:pointer;font-weight:800}
+button.secondary{background:#eef6f0;color:var(--club);border:1px solid #bfd6c7}button.blue{background:#1f6feb}button.danger{background:#b42318}button.gold{background:var(--gold)}
+select,input,textarea{border:1px solid #cbd5d1;border-radius:10px;padding:8px;background:white}select{min-width:220px}
+.mode-pill{display:inline-flex;gap:6px;align-items:center;padding:6px;border-radius:999px;background:rgba(255,255,255,.14)}
+.mode-pill button{background:rgba(255,255,255,.18);padding:8px 12px}.mode-pill button.active{background:white;color:var(--club)}
+.notice{border-left:5px solid var(--gold);background:#fff8e8;padding:12px 14px;border-radius:12px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:1200px){.grid2{grid-template-columns:1fr}}
+.table-scroll{overflow:auto;border-radius:14px;max-height:620px}
+table{border-collapse:separate;border-spacing:0;width:100%;min-width:980px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:white}
+#resume table{min-width:0;table-layout:fixed}
+#resume td,#resume th{word-break:break-word;overflow-wrap:anywhere}
+th{background:var(--club);color:white;padding:10px;font-size:12px;text-align:left;position:sticky;top:0;z-index:4}td{padding:8px;border-top:1px solid var(--line);vertical-align:top;font-size:13px}
+td[contenteditable="true"]{background:#fffef8;outline:0}td[contenteditable="true"]:focus{box-shadow:inset 0 0 0 2px var(--gold);background:white}
+body.public td[contenteditable="true"]{pointer-events:none;background:white}.admin-only{display:block}.public-only{display:none}body.public .admin-only{display:none!important}body.public .public-only{display:block!important}
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:999px;padding:6px 10px;background:white;font-size:12px;font-weight:800}.dot{width:13px;height:13px;border-radius:50%;display:inline-block}.dot.f{background:var(--fongravey)}.dot.p{background:var(--pdr)}.dot.d{background:var(--dupaty)}.dot.l{background:var(--lycee)}
+.gym-fongravey{background:var(--fongravey-bg)!important;border-left:5px solid var(--fongravey)}
+.gym-port-du-roy{background:var(--pdr-bg)!important;border-left:5px solid var(--pdr)}
+.gym-dupaty{background:var(--dupaty-bg)!important;border-left:5px solid var(--dupaty)}
+.gym-lycee-agricole{background:var(--lycee-bg)!important;border-left:5px solid var(--lycee)}
+.day-grid{display:grid;grid-template-columns:105px repeat(4,minmax(270px,1fr));gap:8px;min-width:1220px}
+.gym-head,.day-cell{color:white;padding:10px;border-radius:12px;text-align:center;font-weight:900}.gym-head.fongravey{background:var(--fongravey)}.gym-head.port-du-roy{background:var(--pdr)}.gym-head.dupaty{background:var(--dupaty)}.gym-head.lycee-agricole{background:var(--lycee)}
+.day-cell{background:#edf6f0;color:var(--club);border:1px solid #cfe0d5;display:flex;align-items:center;justify-content:center}
+.slot{background:white;border:1px solid #d7e2dc;border-top-width:5px;border-radius:14px;padding:9px;min-height:90px}.slot.fongravey{border-top-color:var(--fongravey)}.slot.port-du-roy{border-top-color:var(--pdr)}.slot.dupaty{border-top-color:var(--dupaty)}.slot.lycee-agricole{border-top-color:var(--lycee)}
+.item{border-left:5px solid #667085;background:#f8faf9;border-radius:10px;padding:8px;margin:6px 0;line-height:1.25}.item.mini{border-left-color:var(--fongravey);background:var(--fongravey-bg)}.item.jeunes{border-left-color:var(--pdr);background:var(--pdr-bg)}.item.technique{border-left-color:var(--dupaty);background:var(--dupaty-bg)}.item.seniors{border-left-color:var(--lycee);background:var(--lycee-bg)}.item.loisirs{border-left-color:#6b7280;background:#f1f3f5}.item.vital{outline:2px solid #f4aaa3}.item .top{font-weight:950}.item .meta{font-size:12px;color:#475569;margin-top:2px}.small{font-size:12px;color:#647067}
+.scenario-tabs{display:flex;gap:8px;flex-wrap:wrap}.scenario-tabs button.active{background:#102018}.scenario-block{display:none}.scenario-block.active{display:block}.footer-note{font-size:12px;color:#667085;margin-top:8px}
+@media(max-width:760px){.wrap{padding:10px}.card{padding:12px;border-radius:14px}h1{font-size:18px}h2{font-size:17px}#resume table{font-size:12px}#resume td,#resume th{padding:7px}.toolbar select{width:100%;min-width:0}.logo-lock{width:46px;height:46px}}
+@media print{header,.toolbar,.admin-only,.no-print{display:none!important}body{background:white}.wrap{padding:0;max-width:none}.card{break-inside:avoid;box-shadow:none;border:1px solid #ccc}.scenario-block{display:block!important}.table-scroll{max-height:none;overflow:visible}}
+</style>
+</head>
+<body class="public">
+<header><div class="header-inner">
+  <div class="brand">
+    <div class="logo-lock" id="secretLogo" ondblclick="unlockAdmin()" onclick="logoTap()" title="ES Blanquefort Basket"><img src="logo.png" alt="ESBB" onerror="this.remove();document.getElementById('secretLogo').append('ESBB')"></div>
+    <div>
+      <h1>ES Blanquefort Basket — Créneaux rentrée 2026-2027</h1>
+      <p>Créneaux prévisionnels · rentrée 2026-2027</p>
+    </div>
+  </div>
+  <div class="mode-pill no-print admin-only">
+    <button id="btnAdmin" class="active" onclick="setMode('admin')">Admin</button>
+    <button id="btnPublic" onclick="setMode('public')">Lecture seule</button>
+  </div>
+</div></header>
+<div class="wrap">
+
+<section class="card">
+<h2>Vue générale</h2>
+<div class="notice admin-only"><strong>Admin :</strong> modifie les cases, ajoute tes lignes, puis clique sur <strong>Sauvegarder</strong>. Le bouton <strong>Exporter JSON</strong> permettra de transformer tes données en Google Sheet indépendant ensuite. Pour afficher le vrai logo, place simplement un fichier <strong>logo.png</strong> dans le même dossier que ce HTML.</div>
+<div class="notice public-only"><strong>Consultation :</strong> plannings prévisionnels et scénarios de travail pour la rentrée 2026-2027.</div>
+<div class="toolbar admin-only"><button onclick="saveAll()">Sauvegarder</button><button class="secondary" onclick="loadAll()">Recharger</button><button class="blue" onclick="exportJson()">Exporter JSON</button><label class="secondary" style="border:1px solid #bfd6c7;border-radius:999px;padding:8px 12px;cursor:pointer;color:var(--club);font-weight:800;background:#eef6f0">Importer JSON<input type="file" accept=".json,application/json" onchange="importJson(event)" style="display:none"></label><button class="danger" onclick="resetAll()">Réinitialiser</button></div>
+<div class="toolbar"><button class="gold" onclick="window.print()">Imprimer / PDF</button><select onchange="jumpTo(this.value)"><option value="">Aller à…</option><option value="resume">Points clés</option><option value="actuelsCard">Créneaux actuels</option><option value="groupesCard">Groupes besoins</option><option value="scenarioCard">Scénarios</option></select></div>
+<div class="legend"><span class="chip"><span class="dot f"></span>Fongravey</span><span class="chip"><span class="dot p"></span>Port du Roy</span><span class="chip"><span class="dot d"></span>Dupaty</span><span class="chip"><span class="dot l"></span>Lycée agricole</span></div>
+</section>
+
+<section class="card" id="resume">
+<h2>Points clés</h2>
+<div class="grid2">
+<div><h3>Priorités d’organisation</h3><table id="contraintes"><thead><tr><th>Priorité</th><th>Point</th><th>Argument</th></tr></thead><tbody>
+<tr><td contenteditable="true">Vital</td><td contenteditable="true">Fongravey mercredi 17h30-19h</td><td contenteditable="true">À conserver : école de basket / petits / paniers adaptés.</td></tr>
+<tr><td contenteditable="true">Vital</td><td contenteditable="true">Fongravey mercredi après-midi</td><td contenteditable="true">Base mini-basket : U5 / U7 / U9 / U11. On évite de disperser les petits.</td></tr>
+<tr><td contenteditable="true">Très fort</td><td contenteditable="true">Dupaty</td><td contenteditable="true">Solution technique forte : 6 à 8 paniers selon configuration, possible mutualisation de plusieurs équipes.</td></tr>
+<tr><td contenteditable="true">Très fort</td><td contenteditable="true">Port du Roy</td><td contenteditable="true">Gymnase de match : idéal pour collectifs et seniors, mais moins adapté si besoin de beaucoup de paniers.</td></tr>
+<tr><td contenteditable="true">À cadrer</td><td contenteditable="true">Lycée agricole</td><td contenteditable="true">Ne pas mettre dans les concessions gratuites : à discuter surtout si paiement au prorata.</td></tr>
+</tbody></table></div>
+
+<div><h3>Points d’arbitrage interne</h3><table id="balance"><thead><tr><th>Créneau</th><th>Position</th><th>Condition</th></tr></thead><tbody>
+<tr><td contenteditable="true">Lundi Fongravey 19h-20h30</td><td contenteditable="true">Potentiellement cédable</td><td contenteditable="true">À céder seulement si cela sécurise mieux Fongravey mini-basket ou une compensation utile.</td></tr>
+<tr><td contenteditable="true">Mercredi Port du Roy 19h30-23h</td><td contenteditable="true">Potentiellement négociable</td><td contenteditable="true">Peut bouger selon compensation Port du Roy / Dupaty / Fongravey.</td></tr>
+<tr><td contenteditable="true">Lundi Port du Roy 21h-23h</td><td contenteditable="true">Potentiellement négociable</td><td contenteditable="true">Créneau senior actuel, à garder ou à switcher si mardi/vendredi mieux obtenu.</td></tr>
+<tr><td contenteditable="true">Mercredi Fongravey 17h30-19h</td><td contenteditable="true">À conserver</td><td contenteditable="true">Pas à céder sans vraie compensation Fongravey.</td></tr>
+</tbody></table></div>
+</div>
+</section>
+
+<section class="card" id="groupesCard">
+<h2>Groupes et besoins — 2 entraînements par équipe</h2><div class="toolbar admin-only"><button onclick="addRow('groupes')">Ajouter une équipe</button></div>
+<div class="table-scroll"><table id="groupes"><thead><tr><th>Équipe</th><th>Statut</th><th>Effectif</th><th>E1 souhaité</th><th>Gymnase E1</th><th>E2 souhaité</th><th>Gymnase E2</th><th>Note</th></tr></thead><tbody>
+<tr><td contenteditable="true">U5</td><td contenteditable="true">Certain</td><td contenteditable="true"></td><td contenteditable="true">Mini-basket</td><td contenteditable="true">Fongravey</td><td contenteditable="true">Optionnel</td><td contenteditable="true">Fongravey</td><td contenteditable="true">Paniers adaptés.</td></tr>
+<tr><td contenteditable="true">U7</td><td contenteditable="true">Certain</td><td contenteditable="true"></td><td contenteditable="true">Mini-basket</td><td contenteditable="true">Fongravey</td><td contenteditable="true">Optionnel</td><td contenteditable="true">Fongravey</td><td contenteditable="true">École de basket.</td></tr>
+<tr><td contenteditable="true">U9</td><td contenteditable="true">Certain</td><td contenteditable="true"></td><td contenteditable="true">Mini-basket</td><td contenteditable="true">Fongravey</td><td contenteditable="true">Technique</td><td contenteditable="true">Fongravey / Dupaty</td><td contenteditable="true"></td></tr>
+<tr><td contenteditable="true">U11</td><td contenteditable="true">Certain</td><td contenteditable="true"></td><td contenteditable="true">Mini-basket / technique</td><td contenteditable="true">Fongravey</td><td contenteditable="true">Collectif</td><td contenteditable="true">Port du Roy / Fongravey</td><td contenteditable="true"></td></tr>
+<tr><td contenteditable="true">U13F</td><td contenteditable="true">Certain</td><td contenteditable="true"></td><td contenteditable="true">Technique mutualisé</td><td contenteditable="true">Dupaty</td><td contenteditable="true">Collectif</td><td contenteditable="true">Port du Roy</td><td contenteditable="true"></td></tr>
+<tr><td contenteditable="true">U13M-1</td><td contenteditable="true">Certain</td><td contenteditable="true"></td><td contenteditable="true">Technique mutualisé</td><td contenteditable="true">Dupaty</td><td contenteditable="true">Collectif</td><td contenteditable="true">Port du Roy</td><td contenteditable="true"></td></tr>
+<tr><td contenteditable="true">U13M-2</td><td contenteditable="true">Certain / probable</td><td contenteditable="true"></td><td contenteditable="true">Technique mutualisé</td><td contenteditable="true">Dupaty</td><td contenteditable="true">Collectif</td><td contenteditable="true">Port du Roy</td><td contenteditable="true"></td></tr>
+<tr><td contenteditable="true">U15M-1</td><td contenteditable="true">Certain</td><td contenteditable="true"></td><td contenteditable="true">Technique mutualisé</td><td contenteditable="true">Dupaty</td><td contenteditable="true">Collectif</td><td contenteditable="true">Port du Roy</td><td contenteditable="true">Continuité SG1 si possible.</td></tr>
+<tr><td contenteditable="true">U15M-2</td><td contenteditable="true">Probable</td><td contenteditable="true"></td><td contenteditable="true">Technique mutualisé</td><td contenteditable="true">Dupaty</td><td contenteditable="true">Collectif</td><td contenteditable="true">Port du Roy</td><td contenteditable="true"></td></tr>
+<tr><td contenteditable="true">U18M</td><td contenteditable="true">Certain</td><td contenteditable="true"></td><td contenteditable="true">Technique mutualisé</td><td contenteditable="true">Dupaty</td><td contenteditable="true">Collectif</td><td contenteditable="true">Port du Roy</td><td contenteditable="true"></td></tr>
+<tr><td contenteditable="true">Seniors M</td><td contenteditable="true">Certain</td><td contenteditable="true"></td><td contenteditable="true">Collectif 1</td><td contenteditable="true">Port du Roy</td><td contenteditable="true">Collectif 2</td><td contenteditable="true">Port du Roy</td><td contenteditable="true">Idéal mardi + vendredi.</td></tr>
+<tr><td contenteditable="true">Loisirs</td><td contenteditable="true">Certain</td><td contenteditable="true"></td><td contenteditable="true">Loisir</td><td contenteditable="true">Dupaty</td><td contenteditable="true">Optionnel</td><td contenteditable="true"></td><td contenteditable="true">Relance de la section.</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="card" id="actuelsCard">
+<h2>Créneaux actuels</h2><div class="toolbar admin-only"><button onclick="addRow('actuels')">Ajouter un créneau actuel</button><button class="secondary" onclick="renderAll()">Mettre à jour le planning</button></div>
+<div class="table-scroll"><table id="actuels" class="slots-table"><thead><tr><th>Jour</th><th>Gymnase</th><th>Début</th><th>Fin</th><th>Équipe / catégorie</th><th>Type</th><th>Priorité</th><th>Commentaire</th></tr></thead><tbody>
+<tr><td contenteditable="true">Lundi</td><td contenteditable="true">Fongravey</td><td contenteditable="true">17:30</td><td contenteditable="true">19:00</td><td contenteditable="true">U9 / U11</td><td contenteditable="true">Mini-basket</td><td contenteditable="true">Important</td><td contenteditable="true">À corriger si besoin.</td></tr>
+<tr><td contenteditable="true">Lundi</td><td contenteditable="true">Fongravey</td><td contenteditable="true">19:00</td><td contenteditable="true">20:30</td><td contenteditable="true">À préciser</td><td contenteditable="true">Créneau visible</td><td contenteditable="true">Négociable</td><td contenteditable="true">Potentiellement cédable.</td></tr>
+<tr><td contenteditable="true">Lundi</td><td contenteditable="true">Port du Roy</td><td contenteditable="true">21:00</td><td contenteditable="true">23:00</td><td contenteditable="true">Seniors M</td><td contenteditable="true">Collectif</td><td contenteditable="true">Fort</td><td contenteditable="true">Créneau actuel seniors.</td></tr>
+<tr><td contenteditable="true">Mardi</td><td contenteditable="true">Lycée agricole</td><td contenteditable="true">18:30</td><td contenteditable="true">20:00</td><td contenteditable="true">U13F</td><td contenteditable="true">Collectif</td><td contenteditable="true">Actuel</td><td contenteditable="true"></td></tr>
+<tr><td contenteditable="true">Mardi</td><td contenteditable="true">Lycée agricole</td><td contenteditable="true">20:00</td><td contenteditable="true">21:30</td><td contenteditable="true">Libre actuellement</td><td contenteditable="true">Libre</td><td contenteditable="true">À arbitrer</td><td contenteditable="true">Non utilisé actuellement.</td></tr>
+<tr><td contenteditable="true">Mercredi</td><td contenteditable="true">Fongravey</td><td contenteditable="true">15:00</td><td contenteditable="true">16:30</td><td contenteditable="true">U13</td><td contenteditable="true">Collectif</td><td contenteditable="true">Actuel</td><td contenteditable="true"></td></tr>
+<tr><td contenteditable="true">Mercredi</td><td contenteditable="true">Fongravey</td><td contenteditable="true">16:45</td><td contenteditable="true">19:00</td><td contenteditable="true">U5 / U7 / U9 / U11</td><td contenteditable="true">École de basket</td><td contenteditable="true">Vital</td><td contenteditable="true">Paniers adaptés.</td></tr>
+<tr><td contenteditable="true">Mercredi</td><td contenteditable="true">Port du Roy</td><td contenteditable="true">18:00</td><td contenteditable="true">20:30</td><td contenteditable="true">U15</td><td contenteditable="true">Collectif</td><td contenteditable="true">Actuel</td><td contenteditable="true"></td></tr>
+<tr><td contenteditable="true">Mercredi</td><td contenteditable="true">Port du Roy</td><td contenteditable="true">20:30</td><td contenteditable="true">22:30</td><td contenteditable="true">Seniors 1 / Seniors 2</td><td contenteditable="true">Collectif</td><td contenteditable="true">Fort</td><td contenteditable="true"></td></tr>
+<tr><td contenteditable="true">Jeudi</td><td contenteditable="true">Lycée agricole</td><td contenteditable="true">18:30</td><td contenteditable="true">20:00</td><td contenteditable="true">U13F</td><td contenteditable="true">Collectif</td><td contenteditable="true">Actuel</td><td contenteditable="true"></td></tr>
+<tr><td contenteditable="true">Jeudi</td><td contenteditable="true">Lycée agricole</td><td contenteditable="true">20:00</td><td contenteditable="true">21:30</td><td contenteditable="true">U18M</td><td contenteditable="true">Collectif</td><td contenteditable="true">Actuel</td><td contenteditable="true"></td></tr>
+<tr><td contenteditable="true">Vendredi</td><td contenteditable="true">Lycée agricole</td><td contenteditable="true">18:00</td><td contenteditable="true">19:30</td><td contenteditable="true">U13M</td><td contenteditable="true">Collectif</td><td contenteditable="true">Actuel</td><td contenteditable="true"></td></tr>
+<tr><td contenteditable="true">Vendredi</td><td contenteditable="true">Lycée agricole</td><td contenteditable="true">19:30</td><td contenteditable="true">21:00</td><td contenteditable="true">U15M</td><td contenteditable="true">Collectif</td><td contenteditable="true">Actuel</td><td contenteditable="true"></td></tr>
+<tr><td contenteditable="true">Vendredi</td><td contenteditable="true">Lycée agricole</td><td contenteditable="true">21:00</td><td contenteditable="true">23:00</td><td contenteditable="true">Loisirs</td><td contenteditable="true">Loisirs</td><td contenteditable="true">Actuel</td><td contenteditable="true"></td></tr>
+</tbody></table></div><h3>Planning actuel</h3><div class="table-scroll"><div id="planningActuel"></div></div>
+</section>
+
+<section class="card" id="scenarioCard">
+<h2>Scénarios</h2><div class="scenario-tabs no-print"><button id="tabA" class="active" onclick="showScenario('A')">Scénario A idéal</button><button id="tabB" onclick="showScenario('B')">Scénario B repli</button><button id="tabC" onclick="showScenario('C')">Scénario C minimum</button></div>
+
+<div id="blockA" class="scenario-block active"><h3>Scénario A — idéal à demander</h3><div class="toolbar admin-only"><button onclick="addRow('simuA')">Ajouter un créneau</button><button class="secondary" onclick="renderAll()">Mettre à jour planning A</button></div><div class="table-scroll"><table id="simuA" class="slots-table"><thead><tr><th>Jour</th><th>Gymnase</th><th>Début</th><th>Fin</th><th>Catégorie / équipe</th><th>Type</th><th>Priorité</th><th>Commentaire</th></tr></thead><tbody>
+<tr><td contenteditable="true">Mercredi</td><td contenteditable="true">Fongravey</td><td contenteditable="true">16:30</td><td contenteditable="true">19:00</td><td contenteditable="true">U5 / U7 / U9 / U11</td><td contenteditable="true">École de basket</td><td contenteditable="true">Vital</td><td contenteditable="true">Paniers adaptés.</td></tr>
+<tr><td contenteditable="true">Lundi</td><td contenteditable="true">Fongravey</td><td contenteditable="true">17:30</td><td contenteditable="true">19:00</td><td contenteditable="true">U9 / U11</td><td contenteditable="true">Mini-basket</td><td contenteditable="true">Vital</td><td contenteditable="true">Paniers adaptés.</td></tr>
+<tr><td contenteditable="true">Mardi</td><td contenteditable="true">Dupaty</td><td contenteditable="true">17:00</td><td contenteditable="true">18:30</td><td contenteditable="true">U13F / U13M-1 / U13M-2 / U15M-2</td><td contenteditable="true">Technique mutualisé</td><td contenteditable="true">Très utile</td><td contenteditable="true">8 paniers, jusqu’à 4 équipes.</td></tr>
+<tr><td contenteditable="true">Jeudi</td><td contenteditable="true">Dupaty</td><td contenteditable="true">18:00</td><td contenteditable="true">19:30</td><td contenteditable="true">U13M-1 / U15M-2</td><td contenteditable="true">Collectif</td><td contenteditable="true">Très utile</td><td contenteditable="true">Permet de réduire le nombre de soirs nécessaires.</td></tr>
+<tr><td contenteditable="true">Mardi</td><td contenteditable="true">Port du Roy</td><td contenteditable="true">20:30</td><td contenteditable="true">22:30</td><td contenteditable="true">Seniors M</td><td contenteditable="true">Collectif</td><td contenteditable="true">Fort</td><td contenteditable="true">Idéal seniors.</td></tr>
+<tr><td contenteditable="true">Vendredi</td><td contenteditable="true">Port du Roy</td><td contenteditable="true">20:30</td><td contenteditable="true">22:30</td><td contenteditable="true">Seniors M</td><td contenteditable="true">Collectif</td><td contenteditable="true">Fort</td><td contenteditable="true">Idéal seniors.</td></tr>
+<tr><td contenteditable="true">Mercredi</td><td contenteditable="true">Fongravey</td><td contenteditable="true">15:00</td><td contenteditable="true">16:30</td><td contenteditable="true">U18</td><td contenteditable="true">Collectif</td><td contenteditable="true">Très utile</td><td contenteditable="true"></td></tr>
+<tr><td contenteditable="true">Vendredi</td><td contenteditable="true">Dupaty</td><td contenteditable="true">20:30</td><td contenteditable="true">22:30</td><td contenteditable="true">Loisirs</td><td contenteditable="true">Loisirs</td><td contenteditable="true">Très utile</td><td contenteditable="true">Relance de la section.</td></tr>
+<tr><td contenteditable="true">Vendredi</td><td contenteditable="true">Port du Roy</td><td contenteditable="true">19:00</td><td contenteditable="true">20:30</td><td contenteditable="true">U15M-1</td><td contenteditable="true">Collectif</td><td contenteditable="true">Fort</td><td contenteditable="true">U15M-1 et SG1 en continu — impératif.</td></tr>
+<tr><td contenteditable="true">Mardi</td><td contenteditable="true">Dupaty</td><td contenteditable="true">18:30</td><td contenteditable="true">20:00</td><td contenteditable="true">U15M-1 / U18M</td><td contenteditable="true">Technique mutualisé</td><td contenteditable="true">Très utile</td><td contenteditable="true"></td></tr>
+<tr><td contenteditable="true">Jeudi</td><td contenteditable="true">Dupaty</td><td contenteditable="true">17:00</td><td contenteditable="true">18:30</td><td contenteditable="true">U13F</td><td contenteditable="true">Collectif</td><td contenteditable="true">Très utile</td><td contenteditable="true"></td></tr>
+</tbody></table></div><h3>Planning A</h3><div class="table-scroll"><div id="planningA"></div></div></div>
+
+<div id="blockB" class="scenario-block"><h3>Scénario B — repli acceptable</h3><div class="notice"><strong>Logique :</strong> si Port du Roy n’est pas obtenu comme souhaité, on bascule certains collectifs vers Dupaty. C’est jouable, mais moins confortable, surtout pour les jeunes tard le jeudi.</div><div class="toolbar admin-only"><button onclick="addRow('simuB')">Ajouter un créneau</button><button class="secondary" onclick="renderAll()">Mettre à jour planning B</button></div><div class="table-scroll"><table id="simuB" class="slots-table"><thead><tr><th>Jour</th><th>Gymnase</th><th>Début</th><th>Fin</th><th>Catégorie / équipe</th><th>Type</th><th>Priorité</th><th>Commentaire</th></tr></thead><tbody>
+<tr><td contenteditable="true">Mercredi</td><td contenteditable="true">Fongravey</td><td contenteditable="true">16:30</td><td contenteditable="true">19:00</td><td contenteditable="true">U5 / U7 / U9 / U11</td><td contenteditable="true">École de basket</td><td contenteditable="true">Vital</td><td contenteditable="true">Non négociable sans compensation.</td></tr>
+<tr><td contenteditable="true">Lundi</td><td contenteditable="true">Fongravey</td><td contenteditable="true">17:30</td><td contenteditable="true">19:00</td><td contenteditable="true">U9 / U11</td><td contenteditable="true">Mini-basket</td><td contenteditable="true">Vital</td><td contenteditable="true">À garder si possible.</td></tr>
+<tr><td contenteditable="true">Mardi</td><td contenteditable="true">Dupaty</td><td contenteditable="true">17:00</td><td contenteditable="true">18:30</td><td contenteditable="true">U13 / U15 technique</td><td contenteditable="true">Technique mutualisé</td><td contenteditable="true">Très utile</td><td contenteditable="true">Solution forte.</td></tr>
+<tr><td contenteditable="true">Mardi</td><td contenteditable="true">Fongravey</td><td contenteditable="true">18:30</td><td contenteditable="true">20:00</td><td contenteditable="true">U15 / U18</td><td contenteditable="true">Repli collectif</td><td contenteditable="true">Solution 2</td><td contenteditable="true">Si Dupaty impossible.</td></tr>
+<tr><td contenteditable="true">Mercredi</td><td contenteditable="true">Port du Roy</td><td contenteditable="true">19:00</td><td contenteditable="true">20:30</td><td contenteditable="true">U15M-1</td><td contenteditable="true">Collectif</td><td contenteditable="true">Fort</td><td contenteditable="true">Avant seniors si regroupement nécessaire.</td></tr>
+<tr><td contenteditable="true">Mercredi</td><td contenteditable="true">Port du Roy</td><td contenteditable="true">20:30</td><td contenteditable="true">22:30</td><td contenteditable="true">Seniors M</td><td contenteditable="true">Collectif</td><td contenteditable="true">Fort</td><td contenteditable="true">Possibilité 20h-22h à arbitrer pour éviter les trous.</td></tr>
+<tr><td contenteditable="true">Jeudi</td><td contenteditable="true">Dupaty</td><td contenteditable="true">18:00</td><td contenteditable="true">20:30</td><td contenteditable="true">U15M-1 / U15M-2</td><td contenteditable="true">Collectif / technique</td><td contenteditable="true">Repli</td><td contenteditable="true">Possible mais moins confortable car cours le lendemain.</td></tr>
+<tr><td contenteditable="true">Vendredi</td><td contenteditable="true">Dupaty</td><td contenteditable="true">20:30</td><td contenteditable="true">22:30</td><td contenteditable="true">Seniors M ou Loisirs</td><td contenteditable="true">Collectif</td><td contenteditable="true">Repli</td><td contenteditable="true">Si Port du Roy vendredi impossible.</td></tr>
+</tbody></table></div><h3>Planning B</h3><div class="table-scroll"><div id="planningB"></div></div></div>
+
+<div id="blockC" class="scenario-block"><h3>Scénario C — minimum vital / dernier recours</h3><div class="notice"><strong>Logique :</strong> on conserve le socle Fongravey mini-basket. Pour les jeunes, priorité 1 Dupaty, priorité 2 Port du Roy, priorité 3 Fongravey. On évite les demi-heures vides et les changements de gymnase inutiles.</div><div class="toolbar admin-only"><button onclick="addRow('simuC')">Ajouter un créneau</button><button class="secondary" onclick="renderAll()">Mettre à jour planning C</button></div><div class="table-scroll"><table id="simuC" class="slots-table"><thead><tr><th>Jour</th><th>Gymnase</th><th>Début</th><th>Fin</th><th>Catégorie / équipe</th><th>Type</th><th>Priorité</th><th>Commentaire</th></tr></thead><tbody>
+<tr><td contenteditable="true">Mercredi</td><td contenteditable="true">Fongravey</td><td contenteditable="true">16:30</td><td contenteditable="true">19:00</td><td contenteditable="true">École de basket</td><td contenteditable="true">Mini-basket</td><td contenteditable="true">Vital</td><td contenteditable="true">À conserver absolument.</td></tr>
+<tr><td contenteditable="true">Lundi</td><td contenteditable="true">Fongravey</td><td contenteditable="true">17:30</td><td contenteditable="true">19:00</td><td contenteditable="true">U9 / U11</td><td contenteditable="true">Mini-basket</td><td contenteditable="true">Vital</td><td contenteditable="true">Si mercredi réduit, ce créneau devient indispensable.</td></tr>
+<tr><td contenteditable="true">Mardi</td><td contenteditable="true">Dupaty</td><td contenteditable="true">17:00</td><td contenteditable="true">20:00</td><td contenteditable="true">U13 / U15 / U18</td><td contenteditable="true">Technique mutualisé</td><td contenteditable="true">Minimum utile</td><td contenteditable="true">Regroupement pour limiter les soirs.</td></tr>
+<tr><td contenteditable="true">Jeudi</td><td contenteditable="true">Fongravey</td><td contenteditable="true">17:30</td><td contenteditable="true">19:00</td><td contenteditable="true">Jeunes</td><td contenteditable="true">Repli</td><td contenteditable="true">Dernier recours</td><td contenteditable="true">Moins idéal que Dupaty / Port du Roy.</td></tr>
+<tr><td contenteditable="true">Vendredi</td><td contenteditable="true">Port du Roy</td><td contenteditable="true">19:00</td><td contenteditable="true">22:00</td><td contenteditable="true">U15 + Seniors</td><td contenteditable="true">Collectif regroupé</td><td contenteditable="true">Dernier recours</td><td contenteditable="true">À resserrer pour éviter les trous.</td></tr>
+</tbody></table></div><h3>Planning C</h3><div class="table-scroll"><div id="planningC"></div></div></div>
+</section>
+
+<section class="card"><h2>Connexion Google Sheet indépendant — plus tard</h2><div class="notice">Cette V3 reste autonome. Après la réunion, on pourra créer un Sheet indépendant et y pousser les mêmes onglets : CRENEAUX_ACTUELS, GROUPES_BESOINS, CONTRAINTES, SIMU_A, SIMU_B, SIMU_C.</div><div class="footer-note">Pour ne rien perdre : bouton <strong>Sauvegarder</strong>, puis <strong>Exporter JSON</strong>.</div></section>
+
+</div>
+
+<script>
+const STORAGE_KEY = "esbb_creneaux_html_v5";
+const ADMIN_CODE = "ESBB2026";
+const OLD_KEYS = ["esbb_creneaux_html_v4","esbb_creneaux_html_v3","esbb_creneaux_html_v1"];
+const DAYS = ["Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"];
+const GYMS = ["Fongravey","Port du Roy","Dupaty","Lycée agricole"];
+function normalize(s){return (s||"").toString().trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")}
+function gymClass(gym){const n=normalize(gym);if(n.includes("fongravey")||n.includes("fontgrave")||n.includes("fongravi"))return"fongravey";if(n.includes("port"))return"port-du-roy";if(n.includes("dupat"))return"dupaty";if(n.includes("lycee")||n.includes("agricole"))return"lycee-agricole";return""}
+function cleanGym(gym){const c=gymClass(gym);if(c==="fongravey")return"Fongravey";if(c==="port-du-roy")return"Port du Roy";if(c==="dupaty")return"Dupaty";if(c==="lycee-agricole")return"Lycée agricole";return gym||""}
+function typeClass(type,prio){const t=normalize(type+" "+prio);if(t.includes("vital"))return"mini vital";if(t.includes("mini")||t.includes("ecole"))return"mini";if(t.includes("tech"))return"technique";if(t.includes("senior"))return"seniors";if(t.includes("loisir"))return"loisirs";return"jeunes"}
+function tableData(id){return[...document.querySelectorAll(`#${id} tbody tr`)].map(r=>[...r.cells].map(c=>c.innerText.trim()))}
+function setTableData(id,rows){const table=document.getElementById(id);if(!table||!rows)return;const cols=table.tHead.rows[0].cells.length;const tbody=table.tBodies[0];tbody.innerHTML="";rows.forEach(row=>{const tr=document.createElement("tr");for(let i=0;i<cols;i++){const td=document.createElement("td");td.contentEditable="true";td.innerText=row[i]||"";tr.appendChild(td)}tbody.appendChild(tr)})}
+function colorGymCells(){document.querySelectorAll("table.slots-table tbody tr").forEach(tr=>{const gymCell=tr.cells[1];if(!gymCell)return;gymCell.classList.remove("gym-fongravey","gym-port-du-roy","gym-dupaty","gym-lycee-agricole");const c=gymClass(gymCell.innerText);if(c)gymCell.classList.add("gym-"+c)})}
+function renderPlanning(tableId,targetId){const data=tableData(tableId);const by={};DAYS.forEach(d=>GYMS.forEach(g=>by[`${d}|${g}`]=[]));data.forEach(r=>{const[jour,gym,debut,fin,equipe,type,prio,comment]=r;const d=DAYS.find(x=>normalize(x)===normalize(jour));const canonicalGym=cleanGym(gym);const g=GYMS.find(x=>normalize(x)===normalize(canonicalGym));if(!d||!g||!equipe)return;by[`${d}|${g}`].push({debut,fin,equipe,type,prio,comment})});let html=`<div class="day-grid"><div></div>`;GYMS.forEach(g=>html+=`<div class="gym-head ${gymClass(g)}">${g}</div>`);DAYS.forEach(d=>{html+=`<div class="day-cell">${d}</div>`;GYMS.forEach(g=>{const items=by[`${d}|${g}`]||[];html+=`<div class="slot ${gymClass(g)}">`;if(items.length===0){html+=`<span class="small">—</span>`}else{items.sort((a,b)=>(a.debut||"").localeCompare(b.debut||""));items.forEach(it=>{html+=`<div class="item ${typeClass(it.type,it.prio)}"><div class="top">${it.debut||"?"}–${it.fin||"?"} · ${it.equipe}</div><div class="meta">${it.type||""}${it.prio?" · "+it.prio:""}</div>${it.comment?`<div class="meta">${it.comment}</div>`:""}</div>`})}html+=`</div>`})});html+=`</div>`;const target=document.getElementById(targetId);if(target)target.innerHTML=html}
+function renderAll(){colorGymCells();renderPlanning("actuels","planningActuel");renderPlanning("simuA","planningA");renderPlanning("simuB","planningB");renderPlanning("simuC","planningC")}
+function addRow(tableId){const table=document.getElementById(tableId);const cols=table.tHead.rows[0].cells.length;const tr=document.createElement("tr");for(let i=0;i<cols;i++){const td=document.createElement("td");td.contentEditable="true";tr.appendChild(td)}table.tBodies[0].appendChild(tr);renderAll()}
+function payload(){const ids=["contraintes","balance","groupes","actuels","simuA","simuB","simuC"];const data={};ids.forEach(id=>data[id]=tableData(id));data.exportedAt=new Date().toISOString();data.version="esbb-creneaux-v5";return data}
+function saveAll(){localStorage.setItem(STORAGE_KEY,JSON.stringify(payload()));renderAll();alert("Sauvegardé dans ce navigateur.")}
+function loadAll(){let raw=localStorage.getItem(STORAGE_KEY);if(!raw){for(const k of OLD_KEYS){if(localStorage.getItem(k)){raw=localStorage.getItem(k);break}}}if(!raw){renderAll();return}try{const data=JSON.parse(raw);["contraintes","balance","groupes","actuels","simuA","simuB","simuC"].forEach(id=>setTableData(id,data[id]))}catch(e){console.warn(e)}renderAll()}
+function resetAll(){if(confirm("Réinitialiser les données sauvegardées dans ce navigateur ?")){localStorage.removeItem(STORAGE_KEY);location.reload()}}
+function exportJson(){const blob=new Blob([JSON.stringify(payload(),null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="esbb-creneaux-simulation-v5.json";a.click();URL.revokeObjectURL(a.href)}
+function importJson(event){const file=event.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const data=JSON.parse(reader.result);["contraintes","balance","groupes","actuels","simuA","simuB","simuC"].forEach(id=>setTableData(id,data[id]));localStorage.setItem(STORAGE_KEY,JSON.stringify(data));renderAll();alert("Import terminé.")}catch(e){alert("Fichier JSON non reconnu.")}};reader.readAsText(file)}
+function setMode(mode){
+  document.body.className=mode;
+  const adminBtn=document.getElementById("btnAdmin");
+  const publicBtn=document.getElementById("btnPublic");
+  if(adminBtn) adminBtn.classList.toggle("active",mode==="admin");
+  if(publicBtn) publicBtn.classList.toggle("active",mode==="public");
+}
+let __logoClicks = 0;
+function logoTap(){
+  __logoClicks++;
+  clearTimeout(window.__logoTimer);
+  window.__logoTimer = setTimeout(()=>{__logoClicks=0}, 1200);
+  if(__logoClicks >= 5){ __logoClicks=0; unlockAdmin(); }
+}
+function unlockAdmin(){
+  const code = prompt("Code admin créneaux ESBB :");
+  if(code === ADMIN_CODE){
+    setMode("admin");
+    alert("Mode admin activé.");
+  } else if(code !== null){
+    alert("Code incorrect.");
+  }
+}
+function showScenario(which){["A","B","C"].forEach(x=>{document.getElementById("block"+x).classList.toggle("active",x===which);document.getElementById("tab"+x).classList.toggle("active",x===which)})}
+function jumpTo(id){if(!id)return;document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"})}
+document.addEventListener("input",e=>{if(e.target&&e.target.matches("td[contenteditable='true']")){clearTimeout(window.__renderTimer);window.__renderTimer=setTimeout(renderAll,200)}})
+loadAll();
+setMode('public');
+</script>
+</body></html>
